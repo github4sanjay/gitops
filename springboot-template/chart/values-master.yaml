@@ -1,5 +1,5 @@
-commit: "7b446e4fa92a0096b395d1a6ab75dc83e47ac916"
-buildDate: "20221217093110"
+commit: "cbd90316ebc857b1e4ae72adeec13b84f6c9894c"
+buildDate: "20230305080124"
 image: "011169381224.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-template"
 
 namespace: prod
