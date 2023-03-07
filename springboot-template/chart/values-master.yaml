@@ -1,0 +1,38 @@
+commit: "7b446e4fa92a0096b395d1a6ab75dc83e47ac916"
+buildDate: "20221217093110"
+image: "011169381224.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-template"
+
+namespace: prod
+
+jvm:
+  options:
+    -Xlog:gc,gc+heap,gc+metaspace
+
+spring:
+  profiles: prod
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 10
+
+terminationGracePeriodSeconds: 30
+
+replicas: 2
+
+resources:
+  requests:
+    memory: "1Gi"
+  limits:
+    memory: "1Gi"

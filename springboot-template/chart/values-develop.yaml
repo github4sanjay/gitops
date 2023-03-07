@@ -1,0 +1,38 @@
+commit: "54670cf2e5ebb38ad20ff1cbb9848425f97c22e6"
+buildDate: "20221217093110"
+image: "opiniongist.registry.jetbrains.space/p/platform/containers/springboot-template"
+
+namespace: develop
+
+jvm:
+  options:
+    -Xlog:gc,gc+heap,gc+metaspace
+
+spring:
+  profiles: dev
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
+
+replicas: 1
+
+resources:
+  requests:
+    memory: "512Mi"
+  limits:
+    memory: "512Mi"
+
+terminationGracePeriodSeconds: 30
