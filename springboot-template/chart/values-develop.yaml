@@ -1,6 +1,6 @@
 commit: "54670cf2e5ebb38ad20ff1cbb9848425f97c22e6"
 buildDate: "20221217093110"
-image: "opiniongist.registry.jetbrains.space/p/platform/containers/springboot-template"
+image: "opiniongist.registry.jetbrains.space/p/sp/containers/springboot-template"
 
 namespace: develop
 
