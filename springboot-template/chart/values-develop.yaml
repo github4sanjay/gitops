@@ -2,7 +2,7 @@ commit: "9000300a7555da9c8334183ef7426ea4449d3e8e"
 buildDate: "20230308062650"
 image: "011169381224.dkr.ecr.ap-southeast-1.amazonaws.com/springboot-template"
 
-namespace: develop
+namespace: default
 
 jvm:
   options:
