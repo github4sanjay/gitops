@@ -27,7 +27,7 @@ readinessProbe:
   initialDelaySeconds: 60
   periodSeconds: 5
 
-replicas: 1
+replicas: 2
 
 resources:
   requests:
