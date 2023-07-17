@@ -1,8 +1,31 @@
-commit: "latest"
+commit: "9000300a7555da9c8334183ef7426ea4449d3e8e"
 buildDate: "20230308062650"
-image: "kimb88/hello-world-spring-boot"
+image: "sanju4115/springboot-template"
 
 namespace: default
+
+jvm:
+  options:
+    -Xlog:gc,gc+heap,gc+metaspace
+
+spring:
+  profiles: dev
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health/liveness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health/readiness
+    port: 8080
+    scheme: HTTP
+  initialDelaySeconds: 60
+  periodSeconds: 5
 
 replicas: 2
 
@@ -11,3 +34,5 @@ resources:
     memory: "512Mi"
   limits:
     memory: "512Mi"
+
+terminationGracePeriodSeconds: 30

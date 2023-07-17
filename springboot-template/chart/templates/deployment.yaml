@@ -16,10 +16,41 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+      imagePullSecrets:
+        - name: awsecr-cred
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image }}:{{ .Values.commit }}
           imagePullPolicy: Always
+          env:
+            - name: spring.cloud.kubernetes.config.namespace
+              value: {{ .Values.namespace }}
+            - name: spring.cloud.kubernetes.config.name
+              value: {{ .Chart.Name }}
+            - name: JAVA_TOOL_OPTIONS
+              value:
+                {{ .Values.jvm.options }}
+                  -Dspring.profiles.active={{ .Values.spring.profiles }}
           ports:
               - containerPort: 8080
                 protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /actuator/health/liveness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          readinessProbe:
+            httpGet:
+              path: /actuator/health/readiness
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          resources:
+            requests:
+              memory: {{ .Values.resources.requests.memory }}
+            limits:
+              memory: {{ .Values.resources.limits.memory }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
