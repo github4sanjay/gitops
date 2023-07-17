@@ -1,0 +1,13 @@
+commit: "latest"
+buildDate: "20230308062650"
+image: "kimb88/hello-world-spring-boot"
+
+namespace: default
+
+replicas: 2
+
+resources:
+  requests:
+    memory: "512Mi"
+  limits:
+    memory: "512Mi"
